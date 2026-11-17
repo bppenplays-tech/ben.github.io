@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation exercises — Ben Gwynn-Costello</title>
+<meta name="description" content="The classic Blender exercises — ball bounce, ball with tail, pendulum swing and a sword scene — built around the 12 principles of animation.">
+<meta property="og:title" content="Animation exercises — Ben Gwynn-Costello">
+<meta property="og:description" content="The classic Blender exercises — ball bounce, ball with tail, pendulum swing and a sword scene — built around the 12 principles of animation.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="../index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <header class="proj-head">
+    <a class="back" href="../index.html#projects">All projects</a>
+    <p class="proj-group">Animation</p>
+    <h1>Animation exercises</h1>
+    <p class="lead">The classic Blender exercises — ball bounce, ball with tail, pendulum swing and a sword scene — built around the 12 principles of animation.</p>
+    <div class="chips"><span class='chip'>Blender</span></div>
+  </header>
+
+  <section>
+    <h2>Gameplay</h2>
+    <video class="media" src="../assets/anim-ball-tail.mp4" poster="../assets/anim-ball-tail-poster.jpg" controls preload="none" playsinline loop></video>
+  </section><section><h2>More clips</h2><div class="media-grid"><figure><video class="media" src="../assets/anim-ball-bounce.mp4" poster="../assets/anim-ball-bounce-poster.jpg" controls loop preload="none" playsinline></video><figcaption>Ball bounce — squash and stretch, timing.</figcaption></figure><figure><video class="media" src="../assets/anim-pendulum.mp4" poster="../assets/anim-pendulum-poster.jpg" controls loop preload="none" playsinline></video><figcaption>Pendulum swing — slow in, slow out.</figcaption></figure><figure><video class="media" src="../assets/anim-sword.mp4" poster="../assets/anim-sword-poster.jpg" controls loop preload="none" playsinline></video><figcaption>Sword scene — anticipation and follow-through.</figcaption></figure></div></section>
+  <section>
+    <h2>About this work</h2><p>Each short clip is a rendered Blender animation practising one or two of the 12 principles: squash and stretch and timing on the bouncing ball, overlapping action on the ball with a tail, ease in and out on the pendulum, and anticipation on the sword swing. I also put together a presentation on the 12 principles themselves.</p></section></main>
+<footer class="foot">
+  <div class="wrap">
+    <nav class="pager" aria-label="Project navigation"><a href="../projects/power-plant.html" rel="prev">Previous: Power Plant</a><a href="../projects/energize.html" rel="next">Next: Energize — game concept</a></nav>
+    <p>Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>

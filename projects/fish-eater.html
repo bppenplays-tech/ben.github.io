@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fish Eater — Ben Gwynn-Costello</title>
+<meta name="description" content="Swim, eat smaller fish, grow. Fish spawn at random sizes and are colour-coded so you can tell what&#x27;s safe to eat.">
+<meta property="og:title" content="Fish Eater — Ben Gwynn-Costello">
+<meta property="og:description" content="Swim, eat smaller fish, grow. Fish spawn at random sizes and are colour-coded so you can tell what&#x27;s safe to eat.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="../index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <header class="proj-head">
+    <a class="back" href="../index.html#projects">All projects</a>
+    <p class="proj-group">Unity games</p>
+    <h1>Fish Eater</h1>
+    <p class="lead">Swim, eat smaller fish, grow. Fish spawn at random sizes and are colour-coded so you can tell what&#x27;s safe to eat.</p>
+    <div class="chips"><span class='chip'>Unity</span><span class='chip'>C#</span><span class='chip'>2D</span></div>
+  </header>
+
+  <section>
+    <h2>Gameplay</h2>
+    <video class="media" src="../assets/fisheater-gameplay.mp4" poster="../assets/fisheater-thumb.jpg" controls preload="none" playsinline></video>
+  </section>
+  <section>
+    <h2>How it works</h2><p>PlayerSwim reads the keyboard axes for fluid movement and clamps you inside the screen. FishSwim gives each fish a random direction, changes it every few seconds, and destroys the fish if it leaves the play area.</p><p>FishSpawner is where the interesting part is: every fish spawns at a random scale and position, then gets a colour based on its size — green is safe, yellow is risky, red will eat you. ScoreManager shows how big you are and gives you a goal, and ChomperCollision grows the player when it eats a fish and ends the game when it dies.</p></section>
+  <section>
+    <h2>Featured code</h2>
+    <p class="code-title">FishSpawner.cs — random size, colour by size</p>
+    <pre class="code" tabindex="0"><code><span class="kw">void</span> <span class="ty">SpawnDynamicfish</span>()
+{
+    <span class="kw">float</span> ry = <span class="ty">Random</span>.<span class="ty">Range</span>(-<span class="nu">4f</span>, <span class="nu">4f</span>);
+    <span class="ty">Vector3</span> <span class="ty">SpawnPos</span> = <span class="kw">new</span> <span class="ty">Vector3</span>(<span class="nu">9f</span>, ry, <span class="nu">0</span>);
+    <span class="ty">GameObject</span> newFish = <span class="ty">Instantiate</span>(fishPrefab, <span class="ty">SpawnPos</span>, <span class="ty">Quaternion</span>.identity);
+
+    <span class="kw">float</span> <span class="ty">RandomScale</span> = <span class="ty">Random</span>.<span class="ty">Range</span>(<span class="nu">0.4f</span>, <span class="nu">2.2f</span>);
+    newFish.transform.localScale = <span class="kw">new</span> <span class="ty">Vector3</span>(<span class="ty">RandomScale</span>, <span class="ty">RandomScale</span>, <span class="nu">1f</span>);
+
+    <span class="ty">SpriteRenderer</span> sr = newFish.<span class="ty">GetComponent</span>&lt;<span class="ty">SpriteRenderer</span>&gt;();
+    <span class="kw">if</span> (sr != <span class="kw">null</span>)
+    {
+        <span class="kw">if</span> (<span class="ty">RandomScale</span> &lt; <span class="nu">0.8</span>)        sr.color = <span class="ty">Color</span>.green;
+        <span class="kw">else</span> <span class="kw">if</span> (<span class="ty">RandomScale</span> &lt; <span class="nu">1.4f</span>)  sr.color = <span class="ty">Color</span>.yellow;
+        <span class="kw">else</span>                          sr.color = <span class="ty">Color</span>.red;
+    }
+}</code></pre>
+    <p>One random number drives both the size and the colour, so the warning the player sees is always true.</p>
+  </section>
+  <section>
+    <h2>All the scripts</h2>
+    <p>5 scripts, each with what it does in my words.</p>
+    <div class="scripts"><figure class="script"><figcaption><b>PlayerSwim</b> — Player movement from the keyboard axes — fluid, and clamped so you stay in bounds.</figcaption><img class="media" src="../assets/scripts/fisheater-player-swim-script.jpg" alt="PlayerSwim script" width="1400" height="517" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>FishSwim</b> — Makes each fish swim in a random direction, change direction every few seconds, and destroys it if it leaves the play area.</figcaption><img class="media" src="../assets/scripts/fisheater-fishswim-script.jpg" alt="FishSwim script" width="1400" height="664" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>FishSpawner</b> — Spawns fish at a random scale and position, and colours them by size so you can tell which are safe to eat.</figcaption><img class="media" src="../assets/scripts/fisheater-fishspwan-script.jpg" alt="FishSpawner script" width="1400" height="914" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>ScoreManager</b> — Shows a score so you know how big you are and what&#x27;s safe, gives you a goal, and shows the death message.</figcaption><img class="media" src="../assets/scripts/fisheater-scoremanager-script.jpg" alt="ScoreManager script" width="1400" height="580" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>ChomperCollision</b> — Grows the player when it eats a fish, and registers game over when the player dies.</figcaption><img class="media" src="../assets/scripts/fisheater-chompercollision-script.jpg" alt="ChomperCollision script" width="1400" height="657" loading="lazy" decoding="async"></figure></div>
+  </section>
+  <section class="conf">
+    <h2>Confidence, before and after</h2>
+    <div class="conf-row">
+      <div class="conf-big"><span class="conf-num conf-before">7</span><span class="conf-arrow"></span><span class="conf-num conf-after">6</span><span class="conf-scale">/10</span></div>
+      <blockquote class="conf-quote">Really fun and challenging. Going in I was 7/10 and coming out 6/10 — I learnt a lot of new things that grew my confidence, but it also reminded me there&#x27;s still a lot I don&#x27;t know. I could recreate it with mild difficulty.</blockquote>
+    </div>
+  </section></main>
+<footer class="foot">
+  <div class="wrap">
+    <nav class="pager" aria-label="Project navigation"><a href="../projects/flappy-bird.html" rel="prev">Previous: Flappy Bird</a><a href="../projects/pong.html" rel="next">Next: Pong</a></nav>
+    <p>Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>

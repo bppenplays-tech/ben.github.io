@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ball Launcher — Ben Gwynn-Costello</title>
+<meta name="description" content="My first Unity project and my first C# — a launcher that fires balls at a wall of boxes, scored by what gets knocked down.">
+<meta property="og:title" content="Ball Launcher — Ben Gwynn-Costello">
+<meta property="og:description" content="My first Unity project and my first C# — a launcher that fires balls at a wall of boxes, scored by what gets knocked down.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="../index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <header class="proj-head">
+    <a class="back" href="../index.html#projects">All projects</a>
+    <p class="proj-group">Unity games</p>
+    <h1>Ball Launcher</h1>
+    <p class="lead">My first Unity project and my first C# — a launcher that fires balls at a wall of boxes, scored by what gets knocked down.</p>
+    <div class="chips"><span class='chip'>Unity</span><span class='chip'>C#</span></div>
+  </header>
+
+  <section>
+    <h2>Gameplay</h2>
+    <video class="media" src="../assets/bowling-gameplay.mp4" poster="../assets/bowling-thumb.jpg" controls preload="none" playsinline></video>
+  </section>
+  <section>
+    <h2>How it works</h2><p>This was my first time using code other than Python. Movement uses WASD with the camera as the direction, so you aim by looking. Pressing space fires a ball from the launcher, and a Launch script on the ball itself adds the initial force in whatever direction I was facing when I fired.</p><p>A Delete script removes each ball after its first collision to save memory, and a Score script destroys the boxes when they&#x27;re hit and tracks the score in the debug log. There&#x27;s also a task1 script — just me practising how Debug.Log works.</p></section>
+  <section>
+    <h2>Featured code</h2>
+    <p class="code-title">launch.cs — give the ball its push</p>
+    <pre class="code" tabindex="0"><code><span class="kw">public</span> <span class="kw">class</span> launch : <span class="ty">MonoBehaviour</span>
+{
+    <span class="kw">public</span> <span class="kw">int</span> force = <span class="nu">1000</span>;
+
+    <span class="kw">void</span> <span class="ty">Start</span>()
+    {
+        <span class="ty">GetComponent</span>&lt;<span class="ty">Rigidbody</span>&gt;().<span class="ty">AddForce</span>(transform.forward * force);
+    }
+}</code></pre>
+    <p>The whole mechanic in one line: the moment a ball is spawned it gets a force along its own forward direction, which is wherever the launcher was pointing.</p>
+  </section>
+  <section>
+    <h2>All the scripts</h2>
+    <p>6 scripts, each with what it does in my words.</p>
+    <div class="scripts"><figure class="script"><figcaption><b>Movement</b> — Gets the player&#x27;s input to aim the launcher — WASD for movement, with the camera as the direction, so you fire wherever you&#x27;re looking.</figcaption><img class="media" src="../assets/scripts/bowling-movement-script.jpg" alt="Movement script" width="1400" height="550" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Fire</b> — Fires a ball from the launcher when the player presses space.</figcaption><img class="media" src="../assets/scripts/bowling-fire-script.jpg" alt="Fire script" width="1400" height="401" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Launch</b> — Sits on the ball and adds the initial force, so once fired it follows the direction I was facing.</figcaption><img class="media" src="../assets/scripts/bowling-launch-script.jpg" alt="Launch script" width="1400" height="334" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Delete</b> — Deletes the ball after its first collision to save memory, and tracks the score in the debug log.</figcaption><img class="media" src="../assets/scripts/bowling-delete-script.jpg" alt="Delete script" width="1400" height="552" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Score</b> — Destroys the boxes after they&#x27;re hit.</figcaption><img class="media" src="../assets/scripts/bowling-score-script.jpg" alt="Score script" width="1400" height="615" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Task1</b> — A practice script to get the basics of how Debug.Log works.</figcaption><img class="media" src="../assets/scripts/bowling-task1-script.jpg" alt="Task1 script" width="1400" height="459" loading="lazy" decoding="async"></figure></div>
+  </section>
+  <section class="conf">
+    <h2>Confidence, before and after</h2>
+    <div class="conf-row">
+      <div class="conf-big"><span class="conf-num conf-before conf-na">–</span><span class="conf-arrow"></span><span class="conf-num conf-after">5</span><span class="conf-scale">/10</span></div>
+      <blockquote class="conf-quote">This was my first Unity project and first time using code other than Python, so I can&#x27;t give an accurate starting confidence. By the end I&#x27;d say 5/10 — I could remake it, but it would be challenging.</blockquote>
+    </div>
+  </section></main>
+<footer class="foot">
+  <div class="wrap">
+    <nav class="pager" aria-label="Project navigation"><span></span><a href="../projects/reverse-flappy.html" rel="next">Next: Reverse Flappy Bird</a></nav>
+    <p>Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>

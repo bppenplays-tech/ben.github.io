@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energize — game concept — Ben Gwynn-Costello</title>
+<meta name="description" content="My own FPS: fast, chaotic, low-poly — old-school Doom meets Cruelty Squad. Pitch deck, design document, enemy stats and the first level pieces.">
+<meta property="og:title" content="Energize — game concept — Ben Gwynn-Costello">
+<meta property="og:description" content="My own FPS: fast, chaotic, low-poly — old-school Doom meets Cruelty Squad. Pitch deck, design document, enemy stats and the first level pieces.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="../index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <header class="proj-head">
+    <a class="back" href="../index.html#projects">All projects</a>
+    <p class="proj-group">Game concept</p>
+    <h1>Energize — game concept</h1>
+    <p class="lead">My own FPS: fast, chaotic, low-poly — old-school Doom meets Cruelty Squad. Pitch deck, design document, enemy stats and the first level pieces.</p>
+    <div class="chips"><span class='chip'>Game design document</span><span class='chip'>Pitch deck</span><span class='chip'>Blender</span></div>
+  </header>
+
+  <section>
+    <h2>About this work</h2><p>Energize is a fast-paced action FPS with a minimal story and no scopes — everything is shot from the hip. The pitch is simple: kill, heal, craft and crack skulls, and feel immortal while doing it. The art is deliberately low-poly; sometimes a level will look stunning, sometimes you won&#x27;t notice because there&#x27;s too much killing to do.</p><p>The design document goes into numbers. The player has 300 base health, a punch that does 25 and a plasma crystal pistol that never reloads but overheats after 15 rapid shots: 25 body, 40 head, 15 limb, 50 critical. Three enemy types so far — small grunts (25 HP, hunt in packs, one punch kills and heals you), standard pistol troops (100 HP, overheat their guns a lot) and shield troops (200 HP behind a 75/125 shield that only breaks to punches or sustained fire, giving a 30-second window).</p><p>The core loop is kill → item drop → craft: shield crystals from melee kills become gauntlet charges, plasma crystals upgrade small weapons, volatile crystals make explosives. The story starts with a crash landing on an unknown planet and a radio message to find survivors; the first level is the wasteland and the power plant, and the second is inside a factory, including the corridor above where you override the lasers and dodge acid showers.</p></section><section><h2>Images</h2><div class="media-grid"><figure><img class="media" src="../assets/energize-corridor-up.jpg" alt="Airlock shower corridor with the security lasers up." width="1600" height="900" loading="lazy" decoding="async"><figcaption>Airlock shower corridor with the security lasers up.</figcaption></figure><figure><img class="media" src="../assets/energize-corridor-down.jpg" alt="The same corridor once the lasers are overridden." width="1600" height="900" loading="lazy" decoding="async"><figcaption>The same corridor once the lasers are overridden.</figcaption></figure><figure><img class="media" src="../assets/energize-loop.jpg" alt="The core loop: kill enemies, pick up the drop, craft with it." width="1600" height="1199" loading="lazy" decoding="async"><figcaption>The core loop: kill enemies, pick up the drop, craft with it.</figcaption></figure></div></section></main>
+<footer class="foot">
+  <div class="wrap">
+    <nav class="pager" aria-label="Project navigation"><a href="../projects/animation.html" rel="prev">Previous: Animation exercises</a><span></span></nav>
+    <p>Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>

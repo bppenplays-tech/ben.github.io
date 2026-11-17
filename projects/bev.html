@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEV — Top-Down Shooter — Ben Gwynn-Costello</title>
+<meta name="description" content="Bird&#x27;s-eye-view shooter: enemies spawn from a random side and hunt you, elites shoot back, and you aim with the mouse. The hardest code I&#x27;ve written so far.">
+<meta property="og:title" content="BEV — Top-Down Shooter — Ben Gwynn-Costello">
+<meta property="og:description" content="Bird&#x27;s-eye-view shooter: enemies spawn from a random side and hunt you, elites shoot back, and you aim with the mouse. The hardest code I&#x27;ve written so far.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="../index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <header class="proj-head">
+    <a class="back" href="../index.html#projects">All projects</a>
+    <p class="proj-group">Unity games</p>
+    <h1>BEV — Top-Down Shooter</h1>
+    <p class="lead">Bird&#x27;s-eye-view shooter: enemies spawn from a random side and hunt you, elites shoot back, and you aim with the mouse. The hardest code I&#x27;ve written so far.</p>
+    <div class="chips"><span class='chip'>Unity</span><span class='chip'>C#</span><span class='chip'>2D</span></div>
+  </header>
+
+  <section>
+    <h2>Gameplay</h2>
+    <video class="media" src="../assets/bev-gameplay.mp4" poster="../assets/bev-thumb.jpg" controls preload="none" playsinline></video>
+  </section>
+  <section>
+    <h2>How it works</h2><p>Spawn runs on three timers. Timer 1 counts to 2 and spawns a normal enemy (e1, the red square, 50 HP). Timer 2 counts to 3.5 and calls location, which picks a random side of the map, top, bottom, left or right, then a random point along it, so spawns never settle into a pattern. Timer 3 reaches 7 and spawns the elite (e2, the red circle, 100 HP). Both enemy scripts move continuously towards the player, clamp to the arena, and shoot a bullet every second that does 20 damage on hit; when their HP hits zero they&#x27;re destroyed and AddPoint is called.</p><p>The player bullet is the same script as the enemy&#x27;s, except it calls DamageE1 or DamageE2 on whatever it hits. ScoreManager holds the score and the kill count, with AddPoint and a RemovePoint that resets it when the player dies.</p><p>PlayerM was the hardest script: a new movement system where holding the right mouse button turns the player to face the cursor, so you shoot wherever you&#x27;re aiming. The green commented lines are my failed attempts; the white lines are the version that works. It also holds the HP, the damage function, shoot on space or left click, and the restart when HP reaches zero.</p></section>
+  <section>
+    <h2>Featured code</h2>
+    <p class="code-title">playerm.cs — aim at the mouse (and the attempts that didn&#x27;t work)</p>
+    <pre class="code" tabindex="0"><code><span class="kw">void</span> <span class="ty">Update</span>()
+{
+    <span class="kw">float</span> hInput = <span class="ty">Input</span>.<span class="ty">GetAxis</span>(<span class="st">&quot;Horizontal&quot;</span>);
+    <span class="kw">float</span> vInput = <span class="ty">Input</span>.<span class="ty">GetAxis</span>(<span class="st">&quot;Vertical&quot;</span>);
+    <span class="ty">Vector3</span> dir = <span class="kw">new</span> <span class="ty">Vector3</span>(hInput, vInput, <span class="nu">0</span>).normalized;
+    transform.position += (dir * speed * <span class="ty">Time</span>.deltaTime);
+
+    <span class="kw">if</span> (<span class="ty">Input</span>.<span class="ty">GetKeyDown</span>(<span class="ty">KeyCode</span>.<span class="ty">Space</span>)) { shoot(); }
+    <span class="kw">if</span> (<span class="ty">Input</span>.<span class="ty">GetMouseButtonDown</span>(<span class="nu">0</span>))     { shoot(); }
+
+    <span class="kw">if</span> (<span class="ty">Input</span>.<span class="ty">GetMouseButton</span>(<span class="nu">1</span>))
+    {
+        mousePos = <span class="ty">Camera</span>.main.<span class="ty">ScreenToWorldPoint</span>(<span class="ty">Input</span>.mousePosition);
+        <span class="cm">//zangle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;</span>
+        <span class="cm">//transform.rotation = Quaternion.Euler(0, 0, zangle);</span>
+        mousePos.z = <span class="nu">0</span>;
+        direction = mousePos - transform.position;
+        transform.up = direction;
+    }
+    <span class="kw">if</span> (<span class="ty">Hp</span> &lt;= <span class="nu">0</span>)
+    {
+        <span class="ty">SceneManager</span>.<span class="ty">LoadScene</span>(<span class="ty">SceneManager</span>.<span class="ty">GetActiveScene</span>().name);
+        <span class="ty">GameObject</span> <span class="ty">SM</span> = <span class="ty">GameObject</span>.<span class="ty">FindWithTag</span>(<span class="st">&quot;SM&quot;</span>);
+        <span class="ty">SM</span>.<span class="ty">GetComponent</span>&lt;scoremanager&gt;().<span class="ty">Removepoint</span>();
+    }
+    <span class="kw">float</span> cy = <span class="ty">Mathf</span>.<span class="ty">Clamp</span>(transform.position.y, -my, my);
+    <span class="kw">float</span> cx = <span class="ty">Mathf</span>.<span class="ty">Clamp</span>(transform.position.x, -mx, mx);
+    transform.position = <span class="kw">new</span> <span class="ty">Vector3</span>(cx, cy, <span class="nu">0</span>);
+}
+
+<span class="kw">public</span> <span class="kw">void</span> shoot()
+{
+    <span class="ty">Instantiate</span>(bullet, transform.position, transform.rotation);
+}</code></pre>
+    <p>Two lines did the job in the end, convert the mouse to world space then set transform.up to point at it, after several tries with angles and quaternions that are left in as comments.</p>
+  </section>
+  <section>
+    <h2>All the scripts</h2>
+    <p>9 scripts, each with what it does in my words.</p>
+    <div class="scripts"><figure class="script"><figcaption><b>ScoreManager</b> — Score int and a TMP text; AddPoint when an enemy is destroyed, RemovePoint resets on death.</figcaption><img class="media" src="../assets/scripts/bev-bev-scoremanager-script.jpg" alt="ScoreManager script" width="1400" height="530" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Spawn (1 of 2)</b> — Three timers: 2 s spawns e1, 3.5 s re-rolls the spawn side and position, 7 s spawns the elite e2.</figcaption><img class="media" src="../assets/scripts/bev-bev-spawn-script-1.jpg" alt="Spawn (1 of 2) script" width="1400" height="1222" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Spawn (2 of 2)</b> — The location function: pick top, bottom, left or right, then a random point along that side.</figcaption><img class="media" src="../assets/scripts/bev-bev-spawn-script-2.jpg" alt="Spawn (2 of 2) script" width="1400" height="1131" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Enemy (e1)</b> — Moves towards the player, clamped to the arena, shoots every second; 50 HP.</figcaption><img class="media" src="../assets/scripts/bev-bev-enemy-script.jpg" alt="Enemy (e1) script" width="1400" height="1028" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Enemy2 (e2)</b> — Same as Enemy but 100 HP: the elite, the red circle.</figcaption><img class="media" src="../assets/scripts/bev-bev-enemy2-script.jpg" alt="Enemy2 (e2) script" width="1400" height="978" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Bullete</b> — Enemy bullet: straight line, 20 damage to the player on hit, destroyed when it leaves the arena.</figcaption><img class="media" src="../assets/scripts/bev-bev-bullete-script.jpg" alt="Bullete script" width="1400" height="664" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>Bullet</b> — Player bullet: same as Bullete but calls DamageE1 or DamageE2 on whatever it hits.</figcaption><img class="media" src="../assets/scripts/bev-bev-bullet-script.jpg" alt="Bullet script" width="1400" height="764" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>PlayerM (1 of 2)</b> — Movement, HP, shoot on space or left click, and the commented-out aiming attempts.</figcaption><img class="media" src="../assets/scripts/bev-bev-playerm-script1.jpg" alt="PlayerM (1 of 2) script" width="1400" height="1222" loading="lazy" decoding="async"></figure><figure class="script"><figcaption><b>PlayerM (2 of 2)</b> — The working mouse aim with right click held, the clamp, and restart at 0 HP.</figcaption><img class="media" src="../assets/scripts/bev-bev-playerm-script2.jpg" alt="PlayerM (2 of 2) script" width="1400" height="1222" loading="lazy" decoding="async"></figure></div>
+  </section>
+  <section class="conf">
+    <h2>Confidence, before and after</h2>
+    <div class="conf-row">
+      <div class="conf-big"><span class="conf-num conf-before conf-na">–</span><span class="conf-arrow"></span><span class="conf-num conf-after">7</span><span class="conf-scale">/10</span></div>
+      <blockquote class="conf-quote">After Snake I was ready to challenge myself. I could have stuck to what I knew, but I pushed to learn new ways to do things, so a very easy project turned into something hard. My confidence hasn&#x27;t grown that much, but it has improved: I&#x27;m confident in my basic code and still have a way to go with the harder stuff. 7/10. I&#x27;d struggle to remake this without help unless I removed the look-at aiming; without that I could remake it with no help.</blockquote>
+    </div>
+  </section></main>
+<footer class="foot">
+  <div class="wrap">
+    <nav class="pager" aria-label="Project navigation"><a href="../projects/snake.html" rel="prev">Previous: Snake</a><a href="../projects/asteroid.html" rel="next">Next: Asteroid</a></nav>
+    <p>Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>
