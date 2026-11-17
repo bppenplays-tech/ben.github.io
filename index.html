@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ben Gwynn-Costello — portfolio</title>
+<meta name="description" content="I make games in Unity with C#, write Python, model in Blender and I&#x27;m designing my own FPS, Energize. For every project I rated how confident I felt going in and coming out, so this site shows the work and what it taught me.">
+<meta property="og:title" content="Ben Gwynn-Costello — portfolio">
+<meta property="og:description" content="I make games in Unity with C#, write Python, model in Blender and I&#x27;m designing my own FPS, Energize. For every project I rated how confident I felt going in and coming out, so this site shows the work and what it taught me.">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9fb" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;#000&quot;/&gt;&lt;rect x=&quot;7&quot; y=&quot;17&quot; width=&quot;5&quot; height=&quot;8&quot; fill=&quot;#2b4559&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;11&quot; width=&quot;5&quot; height=&quot;14&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;rect x=&quot;21&quot; y=&quot;7&quot; width=&quot;5&quot; height=&quot;18&quot; fill=&quot;#43ff6b&quot;/&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem("ben-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body class="has-boot">
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Site">
+  <span class="progress" aria-hidden="true"></span>
+  <div class="wrap">
+    <a class="brand" href="index.html">ben.gc</a>
+    <div class="nav-links">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#about">About</a>
+      <button class="theme" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+        <span class="theme-sun" aria-hidden="true"></span><span class="theme-moon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div id="boot" aria-label="Intro">
+  <button class="skip-intro" type="button" id="skip">Skip intro →</button>
+  <div class="unity" role="group" aria-label="Ben's project in a Unity-style editor">
+    <div class="u-top">
+      <span class="u-title">ben.gc — Portfolio — Unity 6</span>
+      <div class="u-play">
+        <button class="play" id="run" type="button" disabled aria-label="Play"><span class="ptri"></span></button>
+        <span class="pbtn" aria-hidden="true">‖</span><span class="pbtn" aria-hidden="true">▸|</span>
+        <kbd>Enter</kbd>
+      </div>
+      <span class="u-right" id="status">compiling…</span>
+    </div>
+    <div class="u-body">
+      <aside class="u-panel u-hier"><div class="u-head">Hierarchy</div><ul class="u-tree"><li class="root"><span class="tri open"></span>Portfolio<small>scene</small></li><li><span class="tri"></span>BallLauncher<small>6 scripts</small></li><li><span class="tri"></span>ReverseFlappyBird<small>5 scripts</small></li><li><span class="tri"></span>CoinCollector<small>3 scripts</small></li><li><span class="tri"></span>Balloon<small>6 scripts</small></li><li><span class="tri"></span>FlappyBird<small>4 scripts</small></li><li><span class="tri"></span>FishEater<small>5 scripts</small></li><li><span class="tri"></span>Pong<small>4 scripts</small></li><li><span class="tri"></span>Snake<small>4 scripts</small></li><li><span class="tri"></span>BEV—Top-DownShooter<small>9 scripts</small></li><li><span class="tri"></span>Asteroid<small>8 scripts</small></li></ul></aside>
+      <section class="u-panel u-scene"><div class="u-head"><span>Scene</span><span>Game</span></div><div class="u-view" id="uview"><div class="u-grid"></div><div class="u-name">Ben<br>Gwynn-Costello</div><div class="u-sub">10 games · 54 scripts · Python · Blender</div></div></section>
+      <aside class="u-panel u-insp"><div class="u-head">Inspector</div>
+        <div class="u-comp"><b>Ben Gwynn-Costello</b><small>(Script)</small></div>
+        <div class="u-row"><span>School</span><i>Overworld AMP</i></div>
+        <div class="u-row"><span>Languages</span><i>C#, Python</i></div>
+        <div class="u-row"><span>Tools</span><i>Unity 6, Blender</i></div>
+        <div class="u-row"><span>Games Built</span><i>10</i></div>
+        <div class="u-row"><span>Confidence</span><i>7.3 → 6.8 / 10</i></div>
+        <div class="u-row"><span>Current Project</span><i>Energize (FPS)</i></div>
+      </aside>
+    </div>
+    <div class="u-console"><div class="u-head">Console</div><div class="console-out" id="out"></div></div>
+  </div>
+  <script type="application/json" id="build-log">[["","Reloading assemblies…"],["","Compiling 54 C# scripts in 10 projects"],["ok","✓ BallLauncher · 6 scripts"],["ok","✓ ReverseFlappyBird · 5 scripts"],["ok","✓ CoinCollector · 3 scripts · confidence 8→8"],["ok","✓ Balloon · 6 scripts"],["ok","✓ FlappyBird · 4 scripts · confidence 7→7"],["ok","✓ FishEater · 5 scripts · confidence 7→6"],["ok","✓ Pong · 4 scripts · confidence 8→6"],["ok","✓ Snake · 4 scripts · confidence 8→6"],["ok","✓ BEV—Top-DownShooter · 9 scripts"],["ok","✓ Asteroid · 8 scripts · confidence 6→8"],["hi","Compilation finished · 0 errors · avg confidence 7.3 → 6.8"],["em","Entering Play Mode…"]]</script>
+</div>
+<div id="site">
+<main id="main">
+  <header class="hero">
+    <div class="wrap">
+      <p class="hero-course">Overworld AMP · student portfolio</p>
+      <h1>Ben<br>Gwynn-Costello</h1>
+      <p class="lead">I make games in Unity with C#, write Python, model in Blender and I&#x27;m designing my own FPS, Energize. For every project I rated how confident I felt going in and coming out, so this site shows the work and what it taught me.</p>
+      <div class="chips"><span class='chip'>Unity</span><span class='chip'>C#</span><span class='chip'>Python</span><span class='chip'>Blender</span></div>
+      
+<div class="chart" aria-label="Confidence before and after each Unity project, out of 10">
+  <div class="chart-head">
+    <span>Confidence before → after each game</span>
+    <span class="chart-key"><i class="key key-before"></i>Before <i class="key key-after"></i>After <em>out of 10</em></span>
+  </div>
+  <div class="chart-cols"><a class="ccol" href="projects/bowling.html"><span class="cdelta">first</span><div class="cbars"><div class="cbar cbar-none"><b>?</b></div><div class="cbar cbar-after" style="--v:5"><i></i><b>5</b></div></div><span class="clabel">Ball Launcher</span></a><a class="ccol" href="projects/coin-collector.html"><span class="cdelta ">=</span><div class="cbars"><div class="cbar cbar-before" style="--v:8"><i></i><b>8</b></div><div class="cbar cbar-after" style="--v:8"><i></i><b>8</b></div></div><span class="clabel">Coin Collector</span></a><a class="ccol" href="projects/flappy-bird.html"><span class="cdelta ">=</span><div class="cbars"><div class="cbar cbar-before" style="--v:7"><i></i><b>7</b></div><div class="cbar cbar-after" style="--v:7"><i></i><b>7</b></div></div><span class="clabel">Flappy Bird</span></a><a class="ccol" href="projects/fish-eater.html"><span class="cdelta down">-1</span><div class="cbars"><div class="cbar cbar-before" style="--v:7"><i></i><b>7</b></div><div class="cbar cbar-after" style="--v:6"><i></i><b>6</b></div></div><span class="clabel">Fish Eater</span></a><a class="ccol" href="projects/pong.html"><span class="cdelta down">-2</span><div class="cbars"><div class="cbar cbar-before" style="--v:8"><i></i><b>8</b></div><div class="cbar cbar-after" style="--v:6"><i></i><b>6</b></div></div><span class="clabel">Pong</span></a><a class="ccol" href="projects/snake.html"><span class="cdelta down">-2</span><div class="cbars"><div class="cbar cbar-before" style="--v:8"><i></i><b>8</b></div><div class="cbar cbar-after" style="--v:6"><i></i><b>6</b></div></div><span class="clabel">Snake</span></a><a class="ccol" href="projects/bev.html"><span class="cdelta">first</span><div class="cbars"><div class="cbar cbar-none"><b>?</b></div><div class="cbar cbar-after" style="--v:7"><i></i><b>7</b></div></div><span class="clabel">BEV — Top-Down Shooter</span></a><a class="ccol" href="projects/asteroid.html"><span class="cdelta up">+2</span><div class="cbars"><div class="cbar cbar-before" style="--v:6"><i></i><b>6</b></div><div class="cbar cbar-after" style="--v:8"><i></i><b>8</b></div></div><span class="clabel">Asteroid</span></a></div>
+  <p class="chart-note">Rated by me at the start and end of each project. Going <em>down</em> usually meant I'd found out how much I didn't know yet — Asteroid, the last one, is where it all came together.</p>
+</div>
+    </div>
+  </header>
+
+  <section id="projects" class="wrap units">
+    <h2>Projects</h2>
+    <p class="section-lead">15 pieces of work, each with the real files as evidence: recordings, renders and the scripts I wrote.</p>
+    <h3 class="group-label">Unity games<span>Eleven games in C#, in the order I made them. Each one reuses systems from the last.</span></h3><div class="grid">
+<a class="card" href="projects/bowling.html">
+  <span class="card-media"><img class="card-img" src="assets/bowling-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/bowling-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C#</span><span class="card-conf"><b>5</b>/10</span></div>
+    <h3>Ball Launcher</h3>
+    <p>My first Unity project and my first C# — a launcher that fires balls at a wall of boxes, scored by what gets knocked down.</p>
+  </div>
+</a>
+<a class="card" href="projects/reverse-flappy.html">
+  <span class="card-media"><img class="card-img" src="assets/reverse-flappy-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/reverse-flappy-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span></div>
+    <h3>Reverse Flappy Bird</h3>
+    <p>My first 2D game: a ball falls down a hole and survives by landing on platforms that rise up. Touch the top or the bottom and it&#x27;s over.</p>
+  </div>
+</a>
+<a class="card" href="projects/coin-collector.html">
+  <span class="card-media"><img class="card-img" src="assets/coin-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/coin-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C#</span><span class="card-conf">8 → <b>8</b></span></div>
+    <h3>Coin Collector</h3>
+    <p>Collect coins that spawn on a timer at random spots. The more you collect, the faster you move.</p>
+  </div>
+</a>
+<a class="card" href="projects/balloon.html">
+  <span class="card-media"><img class="card-img" src="assets/balloon-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/balloon-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span></div>
+    <h3>Balloon</h3>
+    <p>Balloons float up, you throw darts to pop them. The more you pop the higher the score. Simple to describe, surprisingly hard to get bug-free.</p>
+  </div>
+</a>
+<a class="card" href="projects/flappy-bird.html">
+  <span class="card-media"><img class="card-img" src="assets/flappy-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/flappy-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span><span class="card-conf">7 → <b>7</b></span></div>
+    <h3>Flappy Bird</h3>
+    <p>A 2D Flappy Bird remake: constant falling, a flap button, pipe pairs at random sizes and a scoring trick to count each gap once.</p>
+  </div>
+</a>
+<a class="card" href="projects/fish-eater.html">
+  <span class="card-media"><img class="card-img" src="assets/fisheater-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/fisheater-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span><span class="card-conf">7 → <b>6</b></span></div>
+    <h3>Fish Eater</h3>
+    <p>Swim, eat smaller fish, grow. Fish spawn at random sizes and are colour-coded so you can tell what&#x27;s safe to eat.</p>
+  </div>
+</a>
+<a class="card" href="projects/pong.html">
+  <span class="card-media"><img class="card-img" src="assets/pong-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/pong-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span><span class="card-conf">8 → <b>6</b></span></div>
+    <h3>Pong</h3>
+    <p>Two-player Pong with a bounce that depends on where the ball hits the paddle.</p>
+  </div>
+</a>
+<a class="card" href="projects/snake.html">
+  <span class="card-media"><img class="card-img" src="assets/snake-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/snake-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D · Lists</span><span class="card-conf">8 → <b>6</b></span></div>
+    <h3>Snake</h3>
+    <p>The Nokia classic with its rigid, grid-locked movement — and my first use of lists in C# to make the body follow the head.</p>
+  </div>
+</a>
+<a class="card" href="projects/bev.html">
+  <span class="card-media"><img class="card-img" src="assets/bev-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/bev-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span><span class="card-conf"><b>7</b>/10</span></div>
+    <h3>BEV — Top-Down Shooter</h3>
+    <p>Bird&#x27;s-eye-view shooter: enemies spawn from a random side and hunt you, elites shoot back, and you aim with the mouse. The hardest code I&#x27;ve written so far.</p>
+  </div>
+</a>
+<a class="card" href="projects/asteroid.html">
+  <span class="card-media"><img class="card-img" src="assets/asteroid-thumb.jpg" alt="" width="1280" height="700" loading="lazy" decoding="async"><video class="card-video" muted loop playsinline preload="none" data-src="assets/asteroid-gameplay.mp4" aria-hidden="true" tabindex="-1"></video></span>
+  <div class="card-body">
+    <div class="card-meta"><span>Unity · C# · 2D</span><span class="card-conf">6 → <b>8</b></span></div>
+    <h3>Asteroid</h3>
+    <p>Dodge and shoot incoming asteroids. Five difficulty levels ramp the spawn rate as your score climbs, with a fire-rate limit so you have to time your shots.</p>
+  </div>
+</a></div><h3 class="group-label">Python<span>Where I started with code.</span></h3><div class="rows">
+<a class="row" href="projects/python.html">
+  <span class="row-img row-empty"></span>
+  <span class="row-text"><span class="row-title">Python scripts</span><span class="row-sum">Rock Paper Scissors, FizzBuzz, an email checker and a few exercises — including rewriting RPS from 120 lines down to 50.</span></span>
+  <span class="row-tools">Python</span>
+</a></div><h3 class="group-label">3D modelling<span>Blender work for Energize.</span></h3><div class="rows">
+<a class="row" href="projects/plasma-pistol.html">
+  <img class="row-img" src="assets/gun-left.jpg" alt="" width="1600" height="843" loading="lazy" decoding="async">
+  <span class="row-text"><span class="row-title">Plasma Crystal Pistol</span><span class="row-sum">My first 3D model: the crystal-powered pistol from Energize, modelled in Blender, textured with emission and imported into Unity as a prefab.</span></span>
+  <span class="row-tools">Blender · Unity</span><span class="row-conf"><b>8</b>/10</span>
+</a>
+<a class="row" href="projects/power-plant.html">
+  <img class="row-img" src="assets/space-building.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async">
+  <span class="row-text"><span class="row-title">Power Plant</span><span class="row-sum">The one undamaged building in Energize&#x27;s first level — the power plant the enemies come out to protect.</span></span>
+  <span class="row-tools">Blender</span>
+</a></div><h3 class="group-label">Animation<span>Blender exercises on the 12 principles.</span></h3><div class="rows">
+<a class="row" href="projects/animation.html">
+  <span class="row-img row-empty"></span>
+  <span class="row-text"><span class="row-title">Animation exercises</span><span class="row-sum">The classic Blender exercises — ball bounce, ball with tail, pendulum swing and a sword scene — built around the 12 principles of animation.</span></span>
+  <span class="row-tools">Blender</span>
+</a></div><h3 class="group-label">Game concept<span>The game all of this is heading towards.</span></h3><div class="rows">
+<a class="row" href="projects/energize.html">
+  <img class="row-img" src="assets/energize-corridor-up.jpg" alt="" width="1600" height="900" loading="lazy" decoding="async">
+  <span class="row-text"><span class="row-title">Energize — game concept</span><span class="row-sum">My own FPS: fast, chaotic, low-poly — old-school Doom meets Cruelty Squad. Pitch deck, design document, enemy stats and the first level pieces.</span></span>
+  <span class="row-tools">Game design document · Pitch deck · Blender</span>
+</a></div>
+  </section>
+
+  <section id="about" class="wrap about">
+    <h2>About</h2>
+    <div class="about-box"><p>I&#x27;m a student at Overworld AMP. I started with Python, moved to C# in Unity with a bowling-style launcher, and have since built ten more games — each one borrowing systems from the last and adding something new: lists, collisions, spawners, difficulty curves.</p><p>Outside the games I model in Blender, animate the classic exercises, and I&#x27;m building the world for Energize, a fast, low-poly, old-school FPS. The plasma pistol on this site is its first weapon.</p></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    
+    <p><button type="button" id="replay" class="replay">↻ replay intro</button> · Ben Gwynn-Costello — Overworld AMP 2026</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var b=document.querySelector('.theme'); if(!b) return;
+  function cur(){ var a=document.documentElement.getAttribute('data-theme'); if(a) return a;
+    return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'; }
+  b.addEventListener('click',function(){ var n=cur()==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n); try{localStorage.setItem('ben-theme',n);}catch(e){} });
+})();
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var boot = document.getElementById('boot'), site = document.getElementById('site');
+  if (boot) {
+    var run = document.getElementById('run'), out = document.getElementById('out'), status = document.getElementById('status');
+    var LOG = JSON.parse(document.getElementById('build-log').textContent);
+    var seen = false; try { seen = localStorage.getItem('ben-intro-seen') === '1'; } catch(e) {}
+    if (/[?&#]intro/.test(location.search + location.hash)) { seen = false; }
+    function launch(){ boot.classList.add('leaving'); site.classList.add('on'); document.body.classList.add('ran'); try{localStorage.setItem('ben-intro-seen','1');}catch(e){} setTimeout(function(){ boot.classList.add('gone'); }, reduce ? 0 : 900); }
+    var launched = false;
+    function doRun(){
+      if (launched || run.disabled) return; launched = true; run.disabled = true; run.classList.add('on'); boot.classList.add('playmode'); status.textContent = 'entering play mode';
+      var delay = 0, step = reduce ? 0 : 120;
+      LOG.slice(2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); delay += step; setTimeout(function(){ el.classList.add('show'); }, delay); });
+      setTimeout(launch, delay + (reduce ? 0 : 350));
+    }
+    if (seen || reduce) { boot.classList.add('gone'); site.classList.add('on'); document.body.classList.add('ran'); }
+    else {
+      var pre = 0; LOG.slice(0,2).forEach(function(b){ var el = document.createElement('span'); el.className = 'line ' + b[0]; el.textContent = b[1]; out.appendChild(el); out.appendChild(document.createTextNode('\n')); pre += 400; setTimeout(function(){ el.classList.add('show'); }, pre); });
+      setTimeout(function(){ run.disabled = false; run.classList.add('ready'); status.textContent = 'ready — press Play'; }, pre + 500);
+      run.addEventListener('click', doRun);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Enter' && !boot.classList.contains('gone')) doRun(); });
+      document.getElementById('skip').addEventListener('click', launch);
+    }
+    var rp = document.getElementById('replay'); if (rp) rp.addEventListener('click', function(){ try{localStorage.removeItem('ben-intro-seen');}catch(e){} location.reload(); });
+  } else if (site) { site.classList.add('on'); }
+  var chart = document.querySelector('.chart');
+  if (chart && !reduce && 'IntersectionObserver' in window) {
+    chart.classList.add('armed');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { chart.classList.add('in'); io.disconnect(); } }); }, {threshold:.35});
+    io.observe(chart);
+  }
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduce) {
+    document.querySelectorAll('.card-media').forEach(function(m){
+      var v = m.querySelector('video'); if (!v) return;
+      var c = m.closest('.card');
+      c.addEventListener('mouseenter', function(){ if (!v.src) v.src = v.getAttribute('data-src'); v.currentTime = 0; v.play().catch(function(){}); m.classList.add('playing'); });
+      c.addEventListener('mouseleave', function(){ v.pause(); m.classList.remove('playing'); });
+    });
+  }
+  var bar = document.querySelector('.progress');
+  if (bar) { var tick = function(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight; bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')'; }; addEventListener('scroll', tick, {passive:true}); tick(); }
+})();
+</script>
+</body>
+</html>
+</div>
